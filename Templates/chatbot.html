@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>রঞ্জন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&family=Crimson+Text:wght@600&family=Fira+Sans+Condensed:wght@100;200;300&family=Fira+Sans:wght@100;200&family=IBM+Plex+Sans+Arabic:wght@100;200;300&family=Inter:wght@300&family=Kolker+Brush&family=Nanum+Gothic&family=Overpass&family=Poor+Story&family=Roboto+Condensed&family=Secular+One&family=Work+Sans&display=swap" rel="stylesheet">
+
+</head>
+<style>
+    body {
+        font-family: 'Chakra Petch', sans-serif;
+        background-color: #7FFFD4;
+        margin: 0;
+        padding: 0;
+    }
+    .chat-container {
+        display: flex;
+        max-width: 1350px;
+        margin: 20px auto;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .chatbox {
+        flex: 5; /* Adjusted to 50% width */
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+
+    .image-container {
+        border-radius: 10px;
+        /* margin-right: 10px; */
+        flex: 5; /* Adjusted to 50% width */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-section img {
+        max-width: 90%;
+        max-height: 100%;
+        border-radius: 10px;
+    }
+
+    .chatbox h1 {
+        text-align: center;
+    }
+
+    #chatlog {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        white-space: pre-wrap;
+    }
+
+    .input-container {
+        display: flex;
+        align-items: center;
+    }
+
+    #userInput {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        white-space: pre-wrap;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+    div#chatlog div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+
+    }
+
+    div#chatlog div:nth-child(odd) {
+        flex-direction: row-reverse;
+    }
+
+    div#chatlog div:nth-child(even) {
+        flex-direction: row;
+    }
+    
+
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .logo img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .message {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        width: 70%;
+        white-space: pre-wrap;
+    }
+
+    .user-message {
+    align-self: flex-end;
+    color: #ffffff;
+    white-space: pre-wrap;
+    background-color: #0663c5;
+    padding: 6px;
+    border-radius: 20px;
+    justify-content: flex-end; /* Add this line */
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    white-space: pre-wrap;
+    justify-content: flex-start; /* Add this line */
+}
+    .message-section {
+        flex: 5;
+    }
+    .root-container {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #6f6c6c;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        max-width: 2000px;
+        background-color: #00FFFF   ;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    p {
+        color : #fffff;
+    }
+    
+    legend {
+        color : #fffff;
+    }
+    
+    a {
+        color : #f2f2f2;
+        align-items: center;
+    }
+    
+
+
+
+</style>
+
+<body>  
+      <form>
+        <fieldset><legend>Note</legend>
+        <p>
+            Thank you for using our Medical Assistant App রঞ্জন. This app predicts disease and suggest doctors according to your symptoms, location and availability of doctors. suggest You can ask your own questions and get answer accordingly.     
+        </p>
+        </fieldset>
+        </form>
+    
+    
+    <div class="chat-container">
+        <div class="message-section">
+            <div class="chatbox">
+                <h1>রঞ্জন</h1>
+                <div id="chatlog"></div>
+                <div class="input-container">
+                    <input type="text" id="userInput" placeholder="Type your message here...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        <div class="image-section">
+            <div class="image-container">
+                <img src="https://leverageedublog.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2019/10/23170032/Medical-Science-Courses.jpg" alt="Company Logo" id="companyLogo">
+            </div>
+        </div>
+  
+    </div>
+
+    <script>
+        // Add image URLs for user and bot avatars
+        const userAvatarUrl = "https://cdn-icons-png.flaticon.com/512/149/149071.png?w=740&t=st=1691311375~exp=1691311975~hmac=0f652e2d071f60fafc0fe003ca7ce08dac12fb602ce27b17a8d54c8504ce982f";
+        const botAvatarUrl = "https://img.freepik.com/premium-vector/medical-robot-android_111928-2.jpg?w=740";
+
+        function appendMessage(message, isUserMessage) {
+            var chatlog = document.getElementById("chatlog");
+            var messageDiv = document.createElement("div");
+
+            // Create image element for user or bot based on isUserMessage flag
+            var avatarImg = document.createElement("img");
+            avatarImg.src = isUserMessage ? userAvatarUrl : botAvatarUrl;
+            avatarImg.style.width = "30px";
+            avatarImg.style.height = "30px";
+            avatarImg.style.borderRadius = "50%";
+            messageDiv.appendChild(avatarImg);
+
+            // Create message content element
+            var messageContent = document.createElement("span");
+            messageContent.className = isUserMessage ? "user-message" : "bot-message";
+            messageContent.innerText = message;
+            messageDiv.appendChild(messageContent);
+
+            // Append the message div to the chat log
+            chatlog.appendChild(messageDiv);
+        }
+
+        function sendMessage() {
+            var userInput = document.getElementById("userInput").value;
+            if (userInput.trim() !== "") {
+                appendMessage("You: " + userInput, true);
+                document.getElementById("userInput").value = "";
+
+                fetch(window.location.href, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: 'user_input=' + encodeURIComponent(userInput)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    appendMessage("" + data.response, false);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
+        // Function to get the CSRF token
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+        <div class="root-container">
+            <div>By রঞ্জন</div>
+        </div>
+</body>
+</html>
